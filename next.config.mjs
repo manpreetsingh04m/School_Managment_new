@@ -24,17 +24,9 @@
  * version (next.config.ts) that may be used instead depending on setup.
  */
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Ensure Next traces files relative to the actual project workspace
-  // This is important for monorepo setups where the project is in a subdirectory
-  outputFileTracingRoot: path.join(__dirname, '..'),
+  // Default config – customize if you actually need special settings
 };
 
 export default nextConfig;
