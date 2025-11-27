@@ -24,9 +24,15 @@
  * version (next.config.ts) that may be used instead depending on setup.
  */
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Default config – customize if you actually need special settings
+  // Force tracing to stay inside this workspace (avoids /path0/path0 issues)
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;
