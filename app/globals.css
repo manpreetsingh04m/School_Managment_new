@@ -1,0 +1,234 @@
+/**
+ * GLOBAL STYLESHEET
+ * 
+ * This file contains all global CSS styles for the school management system.
+ * It defines the design system, color scheme, animations, and responsive behavior.
+ * 
+ * PURPOSE:
+ * - Establishes the visual design system for the entire application
+ * - Defines CSS custom properties for consistent theming
+ * - Provides responsive design utilities for mobile and desktop
+ * - Includes custom animations and transitions for better UX
+ * - Ensures consistent styling across all components
+ * 
+ * FUNCTIONALITY:
+ * - Imports Tailwind CSS for utility-first styling
+ * - Defines color palette with CSS custom properties
+ * - Sets up font variables for typography consistency
+ * - Provides responsive breakpoints and mobile optimizations
+ * - Includes custom animations (fadeInUp, slideInRight, pulse)
+ * - Defines focus states and accessibility improvements
+ * 
+ * DESIGN SYSTEM:
+ * - Primary colors: Indigo-based palette for professional look
+ * - Typography: Geist fonts for modern, readable text
+ * - Animations: Smooth transitions for interactive elements
+ * - Responsive: Mobile-first approach with breakpoint utilities
+ * 
+ * USAGE:
+ * This file is imported by the root layout and affects all pages.
+ * Components can use the defined CSS custom properties and utility classes.
+ */
+
+@import "tailwindcss";
+
+/* ===== CSS CUSTOM PROPERTIES ===== */
+/* Define the color palette and design tokens */
+:root {
+  --background: #ffffff;        /* Main background color */
+  --foreground: #171717;        /* Main text color */
+  --primary: #0b1b5e;          /* Student brand (blue-950) */
+  --primary-dark: #0f246f;     /* Hover */
+  --primary-light: #e5e7eb;    /* Light gray for subtle backgrounds */
+  
+  /* Chat component variables */
+  --primary-foreground: #ffffff;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0b1b5e;
+  --accent: #f1f5f9;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+}
+
+/* ===== TAILWIND THEME CONFIGURATION ===== */
+/* Map CSS custom properties to Tailwind theme variables */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --font-sans: var(--font-geist-sans);    /* Geist Sans font variable */
+  --font-mono: var(--font-geist-mono);    /* Geist Mono font variable */
+}
+
+/* ==== PORTAL SKINS ===================================================== */
+/* Use data-skin on <body> (set by layouts) to theme Button and accents */
+
+/* Default: student (blue-950) */
+body[data-skin="student"] .btn-primary { background-color: #0b1b5e; }
+body[data-skin="student"] .btn-primary:hover { background-color: #0f246f; }
+
+/* Teacher: sky-800 */
+body[data-skin="teacher"] .btn-primary { background-color: #075985; }
+body[data-skin="teacher"] .btn-primary:hover { background-color: #0c4a6e; }
+
+/* Admin: cyan-950 */
+body[data-skin="admin"] .btn-primary { background-color: #083344; }
+body[data-skin="admin"] .btn-primary:hover { background-color: #0b3b4e; }
+
+/* ===== DARK MODE COMPATIBILITY ===== */
+/* Keep the app in light background in both schemes to avoid black flashes */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f3f4f6; /* gray-100 - Light background even in dark mode */
+    --foreground: #111827;  /* gray-900 - Dark text for readability */
+  }
+}
+
+/* ===== LAYOUT FOUNDATION ===== */
+/* Ensure full-height layout and consistent background */
+html, body, #__next, #root {
+  height: 100%; /* Full height for proper layout */
+}
+
+/* ===== BODY STYLING ===== */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* Font stack with system fonts for better performance */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #f3f4f6; /* gray-100 to match dashboard */
+  overscroll-behavior: none; /* Prevent background flashes on iOS bounce */
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Narrow content on very small screens for better mobile experience */
+@media (max-width: 550px) {
+  .narrow-mobile {
+    max-width: 340px; /* Visually slimmer than full width */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+/* ===== CUSTOM ANIMATIONS ===== */
+/* Fade in from bottom animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from right animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse animation for loading states */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ===== ANIMATION UTILITY CLASSES ===== */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== INTERACTIVE ELEMENT TRANSITIONS ===== */
+/* Smooth transitions for all interactive elements */
+button, a, .card, .hover\:scale-105:hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+/* Enhanced focus states for keyboard navigation */
+button:focus, a:focus, input:focus, select:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Blue focus ring */
+}
+
+/* ===== MOBILE-SPECIFIC IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+  /* Consistent padding for mobile screens */
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Smaller text size for mobile readability */
+  .mobile-text-sm {
+    font-size: 0.875rem;
+  }
+  
+  /* Reduced gap for mobile layouts */
+  .mobile-gap-2 {
+    gap: 0.5rem;
+  }
+  
+  /* Mobile select improvements */
+  select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px; /* Minimum touch target size */
+    padding: 12px 16px; /* Better touch area */
+  }
+  
+  /* Select dropdown improvements */
+  select option {
+    padding: 12px 16px;
+    font-size: 16px;
+    background-color: white;
+    color: #374151;
+  }
+  
+  /* Better visibility for select dropdowns */
+  select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}

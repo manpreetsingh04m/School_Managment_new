@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    // ===== TARGET AND MODULE CONFIGURATION =====
+    "target": "ES2017",                    // Compile to ES2017 for modern browser support
+    "lib": ["dom", "dom.iterable", "esnext"], // Include DOM and modern JavaScript APIs
+    "module": "esnext",                    // Use ES modules for better tree shaking
+    "moduleResolution": "bundler",         // Use bundler resolution for Next.js compatibility
+    
+    // ===== STRICT TYPE CHECKING =====
+    "strict": true,                        // Enable all strict type checking options
+    "skipLibCheck": true,                  // Skip type checking of declaration files for faster builds
+    "noEmit": true,                        // Don't emit JavaScript files (Next.js handles this)
+    
+    // ===== MODULE INTEROP =====
+    "allowJs": true,                       // Allow JavaScript files to be compiled
+    "esModuleInterop": true,              // Enable ES module interoperability
+    "resolveJsonModule": true,            // Allow importing JSON files as modules
+    "isolatedModules": true,              // Ensure each file can be safely transpiled
+    
+    // ===== JSX CONFIGURATION =====
+    "jsx": "preserve",                    // Preserve JSX for Next.js to handle
+    
+    // ===== PERFORMANCE OPTIMIZATIONS =====
+    "incremental": true,                  // Enable incremental compilation for faster builds
+    
+    // ===== NEXT.JS INTEGRATION =====
+    "plugins": [
+      {
+        "name": "next"                    // Next.js TypeScript plugin for enhanced DX
+      }
+    ],
+    
+    // ===== PATH MAPPING =====
+    "paths": {
+      "@/*": ["./*"]                      // Map @ alias to project root for cleaner imports
+    }
+  },
+  
+  // ===== FILE INCLUSION =====
+  "include": [
+    "next-env.d.ts",                     // Next.js type definitions
+    "**/*.ts",                           // All TypeScript files
+    "**/*.tsx",                          // All TypeScript React files
+    ".next/types/**/*.ts"                // Next.js generated types
+  ],
+  
+  // ===== FILE EXCLUSION =====
+  "exclude": [
+    "node_modules"                       // Exclude node_modules from compilation
+  ]
+}
